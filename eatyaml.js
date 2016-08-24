@@ -1,6 +1,6 @@
-var parseYAML = function (yaml) {
+var eatYAML = function (yaml) {
     var jsonObj = {};
-    var eatYAML = function (str, obj, trail) {
+    var chewYAML = function (str, obj, trail) {
         str = str.substring(trail.length * 2, str.length);
         var newLineIndex = str.search(/\n/);
         var line = str.substring(0, newLineIndex);
@@ -20,15 +20,15 @@ var parseYAML = function (yaml) {
         if (newDepth > trail.length) {
             obj[beforeColon] = {};
             trail.push(obj[beforeColon]);
-            return eatYAML(remainder, obj[beforeColon], trail);
+            return chewYAML(remainder, obj[beforeColon], trail);
         }
         if (newDepth == trail.length) {
-            return eatYAML(remainder, obj, trail);
+            return chewYAML(remainder, obj, trail);
         }
         if (newDepth < trail.length) {
             trail.splice(newDepth, (trail.length - newDepth));
-            return eatYAML(remainder, trail.length ? trail[trail.length-1] : jsonObj, trail);
+            return chewYAML(remainder, trail.length ? trail[trail.length-1] : jsonObj, trail);
         }
     }
-    return eatYAML(yaml, jsonObj, []);
+    return chewYAML(yaml, jsonObj, []);
 }
