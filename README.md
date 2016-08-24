@@ -13,19 +13,4 @@ So there.
 
 EatYAML.
 
-# ex:
-(untested example written from brain)
-
-var yamlString = '
-hi:
-  i: "like"
-  you: true
-  nice:
-    mangos: "ya got"
-    there: "gary"
-  harassment: false
-';
-
-var newJsonObject = eatYAML(yamlString);
-
-console.log(newJsonObject['nice']['there']);  // gary
+Takes a YAML string. Spits out JSON.
